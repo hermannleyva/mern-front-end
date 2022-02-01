@@ -12,13 +12,13 @@ const CaptainDirectoryItem = (props) => {
   return (
     <li className="user-item">
       <Card className="user-item__content">
-        <Link to={`/${props.userName}`}>
+        <Link to={`/${props.userName}/trips`}>
           <div className="user-item__image">
             <Avatar image={props.image} alt={props.name} />
           </div>
           <div className="user-item__info">
             <h2>
-              <strong>{props.firstNm}</strong> {props.lastNm}
+              <strong>{props.firstName}</strong> {props.lastName}
             </h2>
             <h3>{props.userName}</h3>
           </div>

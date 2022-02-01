@@ -23,8 +23,8 @@ const CaptainDirectory = (props) => {
           key={captain.id}
           id={captain.id}
           image={captain.image}
-          firstNm={captain.firstNm}
-          lastNm={captain.lastNm}
+          firstName={captain.firstName}
+          lastName={captain.lastName}
           userName={captain.userName}
         />
       ))}
