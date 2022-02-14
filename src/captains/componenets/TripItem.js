@@ -9,6 +9,20 @@ import Map from "../../shared/components/UIElements/Map/Map";
 
 const TripItem = (props) => {
   const [showMap, setShowMap] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+  const showDeleteWarningHandler = () => {
+    setShowConfirmModal(true);
+  };
+
+  const cancelDeleteHandler = () => {
+    setShowConfirmModal(false);
+  };
+
+  const confirmDeleteHandler = () => {
+    console.log("DELETED");
+    setShowConfirmModal(false);
+  };
 
   const MapHandler = () => {
     setShowMap(!showMap);
@@ -28,6 +42,20 @@ const TripItem = (props) => {
           <Map center={props.coordinates} zoom={16} />
         </div>
       </Modal>
+      <Modal
+      show={showConfirmModal}
+      onCancel={cancelDeleteHandler}
+        header="Are you sure?"
+        footerClass="place-item__modal-actions"
+        footer={
+          <React.Fragment>
+            <Button inverse onClick={cancelDeleteHandler}>Cancel</Button>
+            <Button danger onClick={confirmDeleteHandler}>Delete</Button>
+          </React.Fragment>
+        }
+      >
+        <p>Are you sure you want to delete?</p>
+      </Modal>
       <li className="place-item">
         <Card className="place-item__content">
           <div className="place-item__image">
@@ -45,7 +73,7 @@ const TripItem = (props) => {
               Map
             </Button>
             <Button to={`/${props.creator}/trips/${props.id}`}>Edit</Button>
-            <Button danger>Delete</Button>
+            <Button danger onClick={showDeleteWarningHandler}>Delete</Button>
           </div>
         </Card>
       </li>
