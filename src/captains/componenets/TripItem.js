@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import "./css/TripItem.css";
 import Button from "../../shared/components/FormElements/Button";
@@ -7,7 +7,11 @@ import Modal from "../../shared/components/UIElements/Modal/Modal";
 
 import Map from "../../shared/components/UIElements/Map/Map";
 
+import { AuthContext } from "../../shared/context/auth-context";
+
 const TripItem = (props) => {
+  const auth = useContext(AuthContext);
+
   const [showMap, setShowMap] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
@@ -72,8 +76,8 @@ const TripItem = (props) => {
             <Button inverse onClick={MapHandler}>
               Map
             </Button>
-            <Button to={`/${props.creator}/trips/${props.id}`}>Edit</Button>
-            <Button danger onClick={showDeleteWarningHandler}>Delete</Button>
+            {auth.isLoggedIn && <Button to={`/${props.creator}/trips/${props.id}`}>Edit</Button>}
+            {auth.isLoggedIn && <Button danger onClick={showDeleteWarningHandler}>Delete</Button>}
           </div>
         </Card>
       </li>
